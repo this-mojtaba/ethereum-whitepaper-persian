@@ -4,6 +4,9 @@
 
 هدف این پروژه ارائه یک ترجمه دقیق، خوانا و وفادار به متن اصلی است؛ به‌گونه‌ای که **ساختار، بخش‌بندی، فرمول‌ها و چیدمان کلی فایل PDF اصلی** تا حد امکان حفظ شود.
 
+لینک مستقیم pdf:
+https://github.com/this-mojtaba/ethereum-whitepaper-persian/blob/main/pdf/Ethereum_Whitepaper_-_Buterin_2014_persian.pdf
+
 ---
 
 ## 📄 منبع اصلی
