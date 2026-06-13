@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://this-mojtaba.github.io/ethereum-whitepaper-persian/sitemap.xml
