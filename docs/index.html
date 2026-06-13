@@ -1,45 +1,503 @@
 <!doctype html>
+
 <html lang="fa" dir="rtl">
 
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
   <title>وایت پیپر اتریوم فارسی | ترجمه فارسی Ethereum Whitepaper</title>
+
   <meta name="description"
     content="ترجمه فارسی غیررسمی وایت پیپر اتریوم نوشته ویتالیک بوترین؛ شامل متن، PDF، ساختار اصلی، فرمول‌ها و اصطلاحات تخصصی بلاکچین.">
   <meta name="keywords"
     content="وایت پیپر اتریوم, ترجمه فارسی Ethereum Whitepaper, اتریوم فارسی, Ethereum Persian, بلاکچین, قرارداد هوشمند, Vitalik Buterin">
+  <meta name="author" content="Mojtaba">
+
+  <meta property="og:title" content="وایت پیپر اتریوم فارسی">
+  <meta property="og:description" content="ترجمه فارسی غیررسمی Ethereum Whitepaper نوشته Vitalik Buterin">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://this-mojtaba.github.io/ethereum-whitepaper-persian/">
+
   <link rel="canonical" href="https://this-mojtaba.github.io/ethereum-whitepaper-persian/">
+
+  <style>
+    :root {
+      --bg: #0f1220;
+      --bg-soft: #171a2e;
+      --card: rgba(255, 255, 255, 0.08);
+      --card-border: rgba(255, 255, 255, 0.14);
+      --text: #f5f7fb;
+      --muted: #b9bfd6;
+      --primary: #8b7cf6;
+      --primary-light: #b7adff;
+      --accent: #65e4c3;
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.35);
+      --radius: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: Tahoma, Arial, sans-serif;
+      color: var(--text);
+      background:
+        radial-gradient(circle at top left, rgba(139, 124, 246, 0.35), transparent 34%),
+        radial-gradient(circle at bottom right, rgba(101, 228, 195, 0.18), transparent 28%),
+        linear-gradient(135deg, #0f1220 0%, #171a2e 48%, #101322 100%);
+      line-height: 1.9;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .page {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 40px 0;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 56px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: -0.3px;
+    }
+
+    .logo {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      box-shadow: 0 10px 30px rgba(139, 124, 246, 0.35);
+      font-size: 22px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      color: var(--muted);
+      font-size: 14px;
+      padding: 8px 12px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      transition: 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+      border-color: var(--card-border);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 32px;
+      align-items: center;
+    }
+
+    .hero-content {
+      padding: 16px 0;
+    }
+
+    .badge {
+      width: fit-content;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--primary-light);
+      background: rgba(139, 124, 246, 0.12);
+      border: 1px solid rgba(139, 124, 246, 0.32);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 820px;
+      font-size: clamp(36px, 6vw, 68px);
+      line-height: 1.25;
+      letter-spacing: -2px;
+    }
+
+    .highlight {
+      color: var(--accent);
+    }
+
+    .lead {
+      max-width: 700px;
+      margin: 24px 0 0;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 14px;
+      font-weight: 700;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), #6b5cf6);
+      box-shadow: 0 16px 36px rgba(139, 124, 246, 0.32);
+      color: #fff;
+    }
+
+    .btn-secondary {
+      border: 1px solid var(--card-border);
+      background: rgba(255, 255, 255, 0.07);
+      color: var(--text);
+    }
+
+    .visual-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 430px;
+      border-radius: var(--radius);
+      background:
+        linear-gradient(160deg, rgba(255, 255, 255, 0.12), rgba(255, 255, 255, 0.04)),
+        rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      box-shadow: var(--shadow);
+      padding: 28px;
+    }
+
+    .visual-card::before {
+      content: "";
+      position: absolute;
+      inset: -70px -40px auto auto;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: rgba(101, 228, 195, 0.22);
+      filter: blur(12px);
+    }
+
+    .eth-mark {
+      position: relative;
+      width: 150px;
+      height: 240px;
+      margin: 48px auto 24px;
+      filter: drop-shadow(0 24px 34px rgba(0, 0, 0, 0.35));
+    }
+
+    .diamond {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%) rotate(45deg);
+      width: 110px;
+      height: 110px;
+      background: linear-gradient(135deg, #ffffff, var(--primary-light));
+      border-radius: 10px;
+    }
+
+    .diamond.top {
+      top: 10px;
+      opacity: 0.95;
+    }
+
+    .diamond.bottom {
+      top: 118px;
+      background: linear-gradient(135deg, var(--primary), var(--accent));
+      opacity: 0.9;
+    }
+
+    .paper-card {
+      position: relative;
+      margin-top: 22px;
+      padding: 22px;
+      border-radius: 20px;
+      background: rgba(15, 18, 32, 0.72);
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(10px);
+    }
+
+    .paper-card h2 {
+      margin: 0 0 8px;
+      font-size: 20px;
+    }
+
+    .paper-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .section {
+      margin-top: 72px;
+    }
+
+    .section-title {
+      margin: 0 0 22px;
+      font-size: 28px;
+      letter-spacing: -0.8px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .info-card {
+      padding: 24px;
+      border-radius: 22px;
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      box-shadow: 0 16px 50px rgba(0, 0, 0, 0.18);
+    }
+
+    .info-card .icon {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.08);
+      margin-bottom: 14px;
+      font-size: 21px;
+    }
+
+    .info-card h3 {
+      margin: 0 0 8px;
+      font-size: 19px;
+    }
+
+    .info-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .quote {
+      margin-top: 72px;
+      padding: 30px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(101, 228, 195, 0.28);
+      background: linear-gradient(135deg, rgba(101, 228, 195, 0.12), rgba(139, 124, 246, 0.10));
+    }
+
+    .quote p {
+      margin: 0;
+      color: var(--text);
+      font-size: 18px;
+    }
+
+    footer {
+      margin-top: 64px;
+      padding-top: 24px;
+      border-top: 1px solid var(--card-border);
+      color: var(--muted);
+      font-size: 14px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    footer a {
+      color: var(--primary-light);
+    }
+
+    @media (max-width: 860px) {
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+        margin-bottom: 36px;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+      }
+
+      .visual-card {
+        min-height: 340px;
+      }
+
+      .grid {
+        grid-template-columns: 1fr;
+      }
+
+      .lead {
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .page {
+        width: min(100% - 22px, 1120px);
+        padding: 24px 0;
+      }
+
+      h1 {
+        letter-spacing: -1px;
+      }
+
+      .actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .visual-card {
+        padding: 20px;
+      }
+    }
+  </style>
+
 </head>
 
 <body>
-  <h1>وایت پیپر اتریوم؛ ترجمه فارسی</h1>
+  <main class="page">
+    <nav class="nav" aria-label="ناوبری اصلی">
+      <a class="brand" href="#">
+        <span class="logo">Ξ</span>
+        <span>Ethereum Whitepaper Persian</span>
+      </a>
 
-  <p>
-    این صفحه شامل ترجمه فارسی غیررسمی وایت پیپر اصلی اتریوم
-    با عنوان Ethereum: A Next-Generation Smart Contract and Decentralized Application Platform
-    نوشته Vitalik Buterin است.
-  </p>
+      ```
+      <div class="nav-links">
+        <a href="#download">دانلود PDF</a>
+        <a href="#github">مخزن GitHub</a>
+        <a href="#source">منبع اصلی</a>
+      </div>
+    </nav>
 
-  <h2>دانلود نسخه PDF</h2>
-  <p>
-    <a
-      href="https://github.com/this-mojtaba/ethereum-whitepaper-persian/blob/main/pdf/Ethereum_Whitepaper_-_Buterin_2014_persian.pdf">دانلود
-      یا مشاهده فایل PDF ترجمه فارسی</a>
-  </p>
+    <section class="hero">
+      <div class="hero-content">
+        <div class="badge">ترجمه فارسی غیررسمی وایت پیپر اتریوم</div>
 
-  <h2>مخزن GitHub</h2>
-  <p>
-    <a href="https://github.com/this-mojtaba/ethereum-whitepaper-persian">
-      مشاهده سورس پروژه در GitHub
-    </a>
-  </p>
+        <h1>
+          وایت پیپر اتریوم؛
+          <span class="highlight">ترجمه فارسی</span>
+        </h1>
 
-  <h2>منبع اصلی</h2>
-  <p>
-    <a href="https://ethereum.org/whitepaper/">
-      Ethereum Whitepaper در وب‌سایت رسمی Ethereum
-    </a>
-  </p>
+        <p class="lead">
+          این صفحه شامل ترجمه فارسی غیررسمی وایت پیپر اصلی اتریوم با عنوان
+          <strong>Ethereum: A Next-Generation Smart Contract and Decentralized Application Platform</strong>
+          نوشته <strong>Vitalik Buterin</strong> است.
+        </p>
+
+        <div class="actions">
+          <a class="btn btn-primary" id="download" href="Ethereum_Whitepaper_-_Buterin_2014_persian.pdf">
+            مشاهده و دانلود PDF
+          </a>
+
+          <a class="btn btn-secondary" id="github" href="https://github.com/this-mojtaba/ethereum-whitepaper-persian"
+            target="_blank" rel="noopener">
+            مشاهده در GitHub
+          </a>
+        </div>
+      </div>
+
+      <aside class="visual-card" aria-label="نمای گرافیکی اتریوم">
+        <div class="eth-mark" aria-hidden="true">
+          <div class="diamond top"></div>
+          <div class="diamond bottom"></div>
+        </div>
+
+        <div class="paper-card">
+          <h2>Ethereum Whitepaper</h2>
+          <p>
+            ترجمه‌ای فارسی برای دسترسی بهتر علاقه‌مندان فارسی‌زبان به مفاهیم پایه‌ای اتریوم،
+            قراردادهای هوشمند و برنامه‌های غیرمتمرکز.
+          </p>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section" aria-labelledby="features-title">
+      <h2 class="section-title" id="features-title">درباره این ترجمه</h2>
+
+      <div class="grid">
+        <article class="info-card">
+          <div class="icon">📄</div>
+          <h3>نسخه PDF</h3>
+          <p>
+            نسخه آماده مطالعه و اشتراک‌گذاری برای کسانی که می‌خواهند متن وایت پیپر را به فارسی بخوانند.
+          </p>
+        </article>
+
+        <article class="info-card">
+          <div class="icon">🔗</div>
+          <h3>متن باز</h3>
+          <p>
+            فایل‌ها در GitHub منتشر شده‌اند تا امکان مشاهده، پیشنهاد اصلاح و مشارکت وجود داشته باشد.
+          </p>
+        </article>
+
+        <article class="info-card">
+          <div class="icon">🌐</div>
+          <h3>دسترسی فارسی</h3>
+          <p>
+            هدف پروژه، ساده‌تر کردن دسترسی فارسی‌زبانان به یکی از اسناد مهم در تاریخ بلاکچین است.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="quote" id="source">
+      <p>
+        منبع اصلی این ترجمه، وایت پیپر اتریوم در وب‌سایت رسمی Ethereum است.
+        برای مشاهده نسخه اصلی انگلیسی می‌توانید به
+        <a href="https://ethereum.org/whitepaper/" target="_blank" rel="noopener">Ethereum.org</a>
+        مراجعه کنید.
+      </p>
+    </section>
+
+    <footer>
+      <span>ترجمه فارسی غیررسمی Ethereum Whitepaper</span>
+      <span>
+        ساخته‌شده برای انتشار آزاد در
+        <a href="https://github.com/this-mojtaba/ethereum-whitepaper-persian" target="_blank" rel="noopener">GitHub</a>
+      </span>
+    </footer>
+    ```
+
+  </main>
 </body>
 
 </html>
